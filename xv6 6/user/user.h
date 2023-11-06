@@ -1,6 +1,8 @@
 #ifndef _USER_H_
 #define _USER_H_
 
+#include "stddef.h"
+
 struct stat;
 struct pstat;
 
@@ -27,12 +29,14 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int settickets(int);
-int getpinfo(struct pstat *);
+int getpinfo(struct pstat*);
+void* mmap(void* addr, size_t length, int prot, int flags, int fd, int offset);
+int munmap(void* addr, size_t length);
 
 // user library functions (ulib.c)
 int stat(char*, struct stat*);
 char* strcpy(char*, char*);
-void *memmove(void*, void*, int);
+void* memmove(void*, void*, int);
 char* strchr(const char*, char c);
 int strcmp(const char*, const char*);
 void printf(int, char*, ...);
@@ -43,5 +47,4 @@ void* malloc(uint);
 void free(void*);
 int atoi(const char*);
 
-#endif // _USER_H_
-
+#endif  // _USER_H_
